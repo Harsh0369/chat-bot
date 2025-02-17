@@ -69,3 +69,5 @@ const sendMail = async (email, subject, otp) => {
         console.log("Error in sending email:", err);
     }
 }
+
+export default sendMail;
