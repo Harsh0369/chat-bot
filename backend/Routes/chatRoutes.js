@@ -1,8 +1,10 @@
 import express from "express"
-import { Chat } from "../controllers/chatController.js";
+import { createChat,getAllChats } from "../controllers/chatController.js";
+import { isAuth } from "../middlewares/isAuth.js";
 
 const router = express.Router();
 
-router.get("/chat", Chat);
+router.post("/new", isAuth, createChat);
+router.get("/all", isAuth, getAllChats);
 
 export default router;
