@@ -78,4 +78,22 @@ export const getConverstation = async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 }
+
+export const deleteChat = async (req, res) => {
+    const chat = await Chat.findById(req.params.id);
+
+    if (!chat)
+    {
+        return res.status(404).json({ message: "Chat not found" });
+    }
+
+    if(chat.user.toString() !== req.user._id.toString())
+    {
+        return res.status(401).json({ message: "Not authorized" });
+    }
+
+    await Chat.deleteOne({ _id: req.params.id });
+
+    res.json({ message: "Chat deleted" });
+ }
   
