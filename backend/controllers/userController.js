@@ -57,3 +57,15 @@ export const verifyUser = async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
  }
+
+export const myProfile = async (req, res) => { 
+    try {
+        const user = await User.findById(req.user._id);
+
+        res.json(user);
+    }
+    catch(err) {
+        console.log(err);
+        res.status(500).json({ message: "Server Error" });
+    }
+}
