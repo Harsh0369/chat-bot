@@ -26,30 +26,56 @@ export const getAllChats = async (req, res) => {
 };
 
 export const addConversation = async (req, res) => {
-  const chat = await Chat.findById(req.params.id);
+    try {
+          const chat = await Chat.findById(req.params.id);
 
-  if (!chat) {
-    return res.status(404).json({ message: "Chat not found" });
-  }
+          if (!chat) {
+            return res.status(404).json({ message: "Chat not found" });
+          }
 
-  const conversation = await Conversation.create({
-    chat: chat._id,
-    question: req.body.question,
-    answer: req.body.answer,
-  });
+          const conversation = await Conversation.create({
+            chat: chat._id,
+            question: req.body.question,
+            answer: req.body.answer,
+          });
 
-  const updatedChat = await Chat.findByIdAndUpdate(
-    req.params.id,
-    {
-      latestMesage: req.body.question,
-    },
-    {
-      new: true,
+          const updatedChat = await Chat.findByIdAndUpdate(
+            req.params.id,
+            {
+              latestMesage: req.body.question,
+            },
+            {
+              new: true,
+            }
+          );
+
+          res.json({
+            conversation,
+            updatedChat,
+          });
     }
-    );
-    
-    res.json({
-        conversation,
-        updatedChat,
-    })
+    catch (err)
+    {
+        console.log(err);
+        res.status(500).json({ message: "Server Error" });
+    }
 };
+
+export const getConverstation = async (req, res) => { 
+    try {
+        const conversation = await Conversation.find({ chat: req.params.id });
+
+        if (!chat)
+        {
+            return res.status(404).json({ message: "Chat not found" });
+        }
+
+        res.json(conversation);
+    }
+    catch (err)
+    {
+        console.log(err);
+        res.status(500).json({ message: "Server Error" });
+    }
+}
+  
