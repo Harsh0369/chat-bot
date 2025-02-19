@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { LoadingSpinner } from "../components/Loading";
 import { useState } from "react";
 import { UserData } from "../context/UserContext";
 
@@ -42,8 +43,11 @@ const Login = () => {
           />
         </div>
 
-        <button className="bg-blue-500 rounded-lg py-2 px-4 text-white text-sm mt-1 hover:bg-blue-600 cursor-pointer hover:scale-110 hover:font-semibold" disabled={btnLoading}>
-            {btnLoading?"Please wait..":"Submit"}
+        <button
+          className="bg-blue-500 rounded-lg py-2 px-4 text-white text-sm mt-1 hover:bg-blue-600 cursor-pointer hover:scale-110 hover:font-semibold"
+          disabled={btnLoading}
+        >
+          {btnLoading ? <LoadingSpinner /> : "Submit"}
         </button>
       </form>
     </div>
