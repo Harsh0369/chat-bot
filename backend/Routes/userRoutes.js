@@ -8,6 +8,6 @@ const router = Router();
 
 router.post("/login", loginUser)
 router.post("/verify", verifyUser)
-router.get("/profile",isAuth, myProfile)
+router.get("/me",isAuth, myProfile)
 
 export default router;
