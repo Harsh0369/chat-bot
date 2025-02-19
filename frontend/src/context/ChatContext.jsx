@@ -83,7 +83,7 @@ export const ChatProvider = ({ children }) => {
           headers: {
             token: localStorage.getItem("token"),
           },
-        }   
+        }
       );
 
       fetchChats();
