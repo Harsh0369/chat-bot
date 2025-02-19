@@ -1,12 +1,15 @@
 import React from 'react'
+import { useNavigate } from "react-router-dom";
+import { UserData } from "../context/UserContext";
 import { useState } from 'react'
 
 const Verify = () => {
-    const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState("");
+  const { verifyUser, btnLoading } = UserData();
   
     const submitHandler = (e) => {
       e.preventDefault();
-      console.log(otp);
+       verifyUser(Number(otp), navigate, fetchChats);
      }
   return (
     <div>

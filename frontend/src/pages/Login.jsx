@@ -1,12 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { UserData } from "../context/UserContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
 
+  const { loginUser, btnLoading } = UserData();
+  const navigate = useNavigate();
+
+
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log(email);
+    loginUser(email, navigate);
    }
   return (
     <div className="flex justify-center items-center h-screen bg-zinc-700">
@@ -36,8 +42,8 @@ const Login = () => {
           />
         </div>
 
-        <button className="bg-blue-500 rounded-lg py-2 px-4 text-white text-sm mt-1 hover:bg-blue-600 cursor-pointer hover:scale-110 hover:font-semibold">
-          Submit
+        <button className="bg-blue-500 rounded-lg py-2 px-4 text-white text-sm mt-1 hover:bg-blue-600 cursor-pointer hover:scale-110 hover:font-semibold" disabled={btnLoading}>
+            {btnLoading?"Please wait..":"Submit"}
         </button>
       </form>
     </div>
