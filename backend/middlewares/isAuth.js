@@ -5,18 +5,19 @@ export const isAuth = async (req, res, next) => {
   try {
     const token = req.headers.token;
 
-    if (!token) {
-      return res.status(401).json({ message: "No token provided" });
-      }
-      const decoded = jwt.verify(token, process.env.Jwt_sec);
-      if(!decoded) {
-          return res.status(401).json({ message: "Invalid Token" });
-      }
-      req.user = await User.findById(decoded._id);
+    if (!token)
+      return res.status(403).json({
+        message: "Please login",
+      });
 
-      next();
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: "Server Error" });
+    const decode = jwt.verify(token, process.env.Jwt_sec);
+
+    req.user = await User.findById(decode._id);
+
+    next();
+  } catch (error) {
+    res.status(500).json({
+      message: "Login First",
+    });
   }
 };

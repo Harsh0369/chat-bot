@@ -1,7 +1,6 @@
 import mongoose from "mongoose";
 
-
-const Schema = new mongoose.Schema(
+const schema = new mongoose.Schema(
   {
     chat: {
       type: mongoose.Schema.Types.ObjectId,
@@ -17,7 +16,9 @@ const Schema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-export const Conversation = mongoose.model("Conversation", Schema);
+export const Conversation = mongoose.model("Conversation", schema);

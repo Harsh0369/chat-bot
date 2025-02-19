@@ -1,25 +1,25 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import connectDB from './database/db.js';
-
-import userRoutes from './Routes/userRoutes.js';
-import chatRoutes from './Routes/chatRoutes.js';
+import express from "express";
+import dotenv from "dotenv";
+import connectDb from "./database/db.js";
+import cors from "cors";
+import userRoutes from "./routes/userRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
+// using middleware
 app.use(express.json());
 app.use(cors());
 
+//importing routes
 
+//using routes
 app.use("/api/user", userRoutes);
-app.use("/api/chats", chatRoutes);
+app.use("/api/chat", chatRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    connectDB();
+app.listen(process.env.PORT, () => {
+  console.log(`server is working on port ${process.env.PORT}`);
+  connectDb();
 });
-
